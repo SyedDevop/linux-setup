@@ -16,7 +16,7 @@ apt install nala -y
 nala install fet thunar curl unzip wget git build-essential
 
 # Installing non esstial programs
-nala install ripgrep fd-find
+nala install ripgrep fd-find xclip
 
 # installing nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
