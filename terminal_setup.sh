@@ -18,7 +18,7 @@ if [[ ! -w ${GITPATH} ]]; then
 fi
 
 command_exists() {
-	command -v $1 >/dev/null 2>&1
+	command -v "$1" >/dev/null 2>&1
 }
 
 apt install -yq autojump bash bash-completion tar bat
@@ -39,12 +39,13 @@ linkApp() {
 
 linkConfig() {
 	## Get the correct user home directory.
-	USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
+	USER_HOME=$(getent passwd "${SUDO_USER:-$USER}" | cut -d: -f6)
 	echo -e "${YELLOW}Linking new bash config file...${RC}"
 	## Make symbolic link.
-	ln -svf ${GITPATH}/kitty/kitty.conf ${USER_HOME}/.config/kitty/kitty.conf
-	ln -svf ${GITPATH}/kitty/theme.conf ${USER_HOME}/.config/kitty/theme.conf
-	ln -svf ${GITPATH}/starship.toml ${USER_HOME}/.config/starship.toml
+	ln -svf "${GITPATH}"/kitty/kitty.conf "${USER_HOME}"/.config/kitty/kitty.conf
+	ln -svf "${GITPATH}"/kitty/theme.conf "${USER_HOME}"/.config/kitty/theme.conf
+	ln -svf "${GITPATH}"/starship.toml "${USER_HOME}"/.config/starship.toml
+	ln -svf "${GITPATH}"/.dir_colors "${USER_HOME}"/.dir_colors
 }
 
 linkApp

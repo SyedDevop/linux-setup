@@ -22,7 +22,7 @@ nala install ripgrep fd-find xclip
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
 nix-env -iA nixpkgs.neovim nixpkgs.lazygit
-
+q
 #Install fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip
 unzip CascadiaCode.zip -d /home/$username/.fonts

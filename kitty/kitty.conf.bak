@@ -256,5 +256,13 @@ initial_window_height 1380
 allow_remote_control yes
 
 # my Default Theme config
-# If you add different name for the file of theme, you need symlinkl the file
-include ./theme.conf
+# include ./theme.conf
+
+#Tokyo Night colors
+include tokoynight.conf
+
+
+# BEGIN_KITTY_THEME
+# Tokyo Night
+# include current-theme.conf
+# END_KITTY_THEME
