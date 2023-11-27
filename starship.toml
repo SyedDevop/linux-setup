@@ -7,7 +7,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#4C566A bg:#86BBD8)\
-$c\
+[$c\
 $dart\
 $elixir\
 $elm\
@@ -18,7 +18,7 @@ $julia\
 $nodejs\
 $nim\
 $rust\
-$python\
+$python](fg:#292e42 bg:#86BBD8 bold)\
 [](fg:#86BBD8 bg:#06969A)\
 $docker_context\
 [](fg:#06969A bg:#33658A)\
@@ -56,15 +56,15 @@ truncation_symbol = "…/"
 # So either put "Important Documents" before "Documents" or use the substituted version:
 # "Important  " = "  "
 
+version_color = "fg:#292e42 bg:#86BBD8 bold"
+
 [c]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [dart]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [docker_context]
 symbol = " "
@@ -73,13 +73,11 @@ format = '[ $symbol $context ]($style) $path'
 
 [elixir]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [elm]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [git_branch]
 symbol = ""
@@ -93,45 +91,36 @@ format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [haskell]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [java]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [julia]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [nodejs]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [nim]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [python]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ($virtualenv) ]($style)'
+format = ' $symbol ($version) ($virtualenv) '
 # python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
-
 
 [rust]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = ' $symbol ($version) '
 
 [time]
 disabled = false
