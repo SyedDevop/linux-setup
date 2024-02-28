@@ -23,7 +23,7 @@ $python](fg:#292e42 bg:#86BBD8 bold)\
 [](fg:#86BBD8 bg:#06969A)\
 $docker_context\
 [](fg:#06969A bg:#33658A)\
-$time\
+$cmd_duration\
 $localip\
 [ ](fg:#33658A)\
 """
@@ -62,6 +62,10 @@ version_color = "fg:#292e42 bg:#86BBD8 bold"
 [c]
 symbol = " "
 format = ' $symbol ($version) '
+
+[cmd_duration]
+style = "bg:#33658A"
+format = '[ took $duration ]($style)'
 
 [dart]
 symbol = " "
@@ -125,8 +129,8 @@ format = ' $symbol ($version) ($virtualenv) '
 symbol = ""
 format = ' $symbol ($version) '
 
-[time]
-disabled = false
-use_12hr = true
-style = "bg:#33658A"
-format = '[ $time ]($style)'
+# [time]
+# disabled = false
+# use_12hr = true
+# style = "bg:#33658A"
+# format = '[ $time ]($style)'
