@@ -121,8 +121,15 @@ symbol = " "
 format = ' $symbol ($version) '
 
 [python]
-symbol = ""
-format = ' $symbol ($version) ($virtualenv) '
+symbol = " "
+format = ' $symbol ($version) (\($virtualenv)\) '
+python_binary = [
+  "./venv/bin/python",
+  "./.venv/bin/python",
+  "python",
+  "python3",
+  "python2",
+]
 # python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
 
 [rust]
