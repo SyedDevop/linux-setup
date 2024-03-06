@@ -122,7 +122,7 @@ format = ' $symbol ($version) '
 
 [python]
 symbol = " "
-format = ' $symbol ($version) (\($virtualenv)\) '
+format = ' $symbol ($version) (\($virtualenv\)) '
 python_binary = [
   "./venv/bin/python",
   "./.venv/bin/python",
