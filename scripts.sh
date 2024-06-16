@@ -13,6 +13,9 @@ pretyjson() {
 		mv -- "$temp_file" "$1"
 }
 
+# NOTE: this will Recursively formate all the json files in the current directory
+# find . -type f -name "*.json" -exec bash -c ' . ~/app/linux-setup/scripts.sh && pretyjson "$0"' {} \;
+
 # take() {
 # 	dir_path="${1%/*.*}"
 # 	mkdir -p "$dir_path"
