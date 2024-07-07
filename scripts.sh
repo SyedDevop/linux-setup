@@ -1,16 +1,16 @@
 nf() {
-	query=""
-	if [[ $# -gt 0 ]]; then
-		query=("$*")
-	fi
-	fzf --query "$query" --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs -I {} nvim {}
+  query=""
+  if [[ $# -gt 0 ]]; then
+    query=("$*")
+  fi
+  fzf --query "$query" --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs -I {} nvim {}
 }
 
 pretyjson() {
-	local temp_file
-	temp_file=$(mktemp) &&
-		jq . <"$1" >"$temp_file" &&
-		mv -- "$temp_file" "$1"
+  local temp_file
+  temp_file=$(mktemp) &&
+    jq . <"$1" >"$temp_file" &&
+    mv -- "$temp_file" "$1"
 }
 
 # NOTE: this will Recursively formate all the json files in the current directory
@@ -29,20 +29,16 @@ pretyjson() {
 # }
 
 take() {
-	dir_path="${1%/*.*}"
-	mkdir -p "$dir_path"
-	if cd "$dir_path"; then
-		echo -e "\e[1;32m[Success]\e[0m Directory created and navigated to: \e[1;34m($dir_path)\e[0m"
-	else
-		echo -e "\e[1;31m[Error]\e[0m Failed to create or navigate to directory: \e[1;34m($dir_path)\e[0m"
-	fi
+  d=$(~/app/linux-setup/bin/path -d "$1")
+  f=$(~/app/linux-setup/bin/path -f "$1")
+  if [[ "$d" != "" ]]; then
+    mkdir -p "$d"
+    cd "$d" || exit
+    echo -e "\e[1;32m[Success]\e[0m Directory created and navigated to: \e[1;34m($d)\e[0m"
+  fi
 
-	if [[ "$1" == *.* ]]; then
-		filename=$(basename "$1")
-		if touch "$filename"; then
-			echo -e "\e[1;32m[Success]\e[0m File created: \e[1;33m($filename)\e[0m"
-		else
-			echo -e "\e[1;31m[Error]\e[0m Failed to create file: \e[1;33m($filename)\e[0m"
-		fi
-	fi
+  if [[ "$f" != "" ]]; then
+    touch "$f"
+    echo -e "\e[1;32m[Success]\e[0m File created: \e[1;33m($f)\e[0m"
+  fi
 }
