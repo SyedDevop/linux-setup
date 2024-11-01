@@ -1,0 +1,53 @@
+live_config_reload = true
+working_directory = "None"
+
+
+import = [
+  # Themes ---
+  "~/app/linux-setup/alacritty/tokyonight_night.toml",
+
+  #key.bindings --
+  "~/app/linux-setup/alacritty/keybinds.toml",
+]
+
+[window]
+title = "Alacritty"
+decorations = "none"
+startup_mode = "Maximized"
+blur = true
+opacity = 0.85
+dynamic_title = true
+padding = { x = 1, y = 4 }
+
+[window.dimensions]
+columns = 160
+lines = 80
+
+[bell.command]
+program = "paplay"
+args = ["--volume=65536", "/usr/share/sounds/freedesktop/stereo/bell.oga"]
+
+[cursor.style]
+shape = "Block"
+blinking = "Never"
+
+[colors]
+#transparent_background_colors = true
+draw_bold_text_with_bright_colors = true
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+#glyph_offset = { x = 1, y = 0 }
+normal.family = "JetBrainsMonoNL Nerd Font Mono"
+normal.style = "Bold"
+size = 12.0
+
+[font.bold]
+family = "JetBrainsMono NF"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono NF"
+style = "Bold Italic"
