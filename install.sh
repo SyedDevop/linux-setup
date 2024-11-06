@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ $EUID -ne 0 ]]; then
-	echo "You must be a root user to run this script, please runn sudo ./install.sh" 2>&1
-	exit 1
+  echo "You must be a root user to run this script, please runn sudo ./install.sh" 2>&1
+  exit 1
 fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
@@ -17,11 +17,6 @@ nala install fet thunar curl unzip wget git build-essential
 
 # Installing non esstial programs
 nala install ripgrep fd-find xclip
-
-# installing nix
-sh <(curl -L https://nixos.org/nix/install) --daemon
-
-nix-env -iA nixpkgs.lazygit
 
 #Install fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip

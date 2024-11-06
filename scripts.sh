@@ -29,8 +29,8 @@ pretyjson() {
 # }
 
 take() {
-  d=$(~/app/linux-setup/bin/path -d "$1")
-  f=$(~/app/linux-setup/bin/path -f "$1")
+  d=$(g_path -d "$1")
+  f=$(g_path -f "$1")
   if [[ "$d" != "" ]]; then
     mkdir -p "$d"
     cd "$d" || exit
