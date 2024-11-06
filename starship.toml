@@ -17,12 +17,12 @@ $julia\
 $nodejs\
 $nim\
 $rust\
+$zig\
 $python](fg:#292e42 bg:#86BBD8 bold)\
 [](fg:#86BBD8 bg:#06969A)\
 $docker_context\
 [](fg:#06969A bg:#33658A)\
 $cmd_duration\
-$localip\
 [ ](fg:#33658A)\
 """
 command_timeout = 5000
@@ -74,16 +74,8 @@ symbol = " "
 style = "bg:#06969A"
 format = '[ $symbol $context ]($style) $path'
 
-[elixir]
-symbol = " "
-format = ' $symbol ($version) '
-
-[elm]
-symbol = " "
-format = ' $symbol ($version) '
-
 [git_branch]
-symbol = ""
+symbol = "  "
 style = "bg:#4C566A"
 format = '[ $symbol $branch ]($style)'
 
@@ -99,20 +91,14 @@ format = ' $symbol ($version) '
 symbol = " "
 format = ' $symbol ($version) '
 
-[julia]
-symbol = " "
-format = ' $symbol ($version) '
 
 [nodejs]
 symbol = " "
 format = ' $symbol ($version) '
 
-[nim]
-symbol = " "
-format = ' $symbol ($version) '
 
 [python]
-symbol = " "
+symbol = "  "
 format = ' $symbol ($version) (\($virtualenv\)) '
 python_binary = [
   "./venv/bin/python",
@@ -124,11 +110,9 @@ python_binary = [
 # python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
 
 [rust]
-symbol = ""
+symbol = "  "
 format = ' $symbol ($version) '
 
-# [time]
-# disabled = false
-# use_12hr = true
-# style = "bg:#33658A"
-# format = '[ $time ]($style)'
+[zig]
+symbol = "  "
+format = ' $symbol ($version) '
