@@ -49,7 +49,6 @@ truncation_symbol = "…/"
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
-"app" = " 󰠦 "
 # Keep in mind that the order matters. For example:
 # "Important Documents" = "  "
 # will not be replaced, because "Documents" was already substituted before.
@@ -97,9 +96,12 @@ format = ' $symbol ($version) '
 symbol = " "
 format = ' $symbol ($version) '
 
+[nim]
+symbol = "nim  "
+format = ' $symbol ($version) '
 
 [python]
-symbol = "  "
+symbol = " "
 format = ' $symbol ($version) (\($virtualenv\)) '
 python_binary = [
   "./venv/bin/python",
