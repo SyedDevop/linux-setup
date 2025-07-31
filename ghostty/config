@@ -4,9 +4,12 @@ cursor-style-blink = true
 cursor-style = block
 window-decoration = false
 window-theme = ghostty
+
 background-opacity = 0.8
 theme = tokyonight
+
 # Key bindings
+
 keybind = alt+enter=toggle_fullscreen
 keybind = alt+page_up=move_tab:-1
 keybind = alt+page_down=move_tab:1

@@ -42,3 +42,5 @@ take() {
     echo -e "\e[1;32m[Success]\e[0m File created: \e[1;33m($f)\e[0m"
   fi
 }
+
+alias git-store="git config --global credential.helper store"
