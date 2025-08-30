@@ -44,3 +44,4 @@ take() {
 }
 
 alias git-store="git config --global credential.helper store"
+alias gcm='git diff --cached | gemini --prompt "Generate a concise, conventional commit message based on the following git diff:" | xargs git commit -m'
