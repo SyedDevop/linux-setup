@@ -44,4 +44,28 @@ take() {
 }
 
 alias git-store="git config --global credential.helper store"
-alias gcm='git diff --cached | gemini --prompt "Generate a concise, conventional commit message based on the following git diff:" | xargs git commit -m'
+
+# Function for AI-generated commit messages
+gcm() {
+  if ! git diff --cached --quiet; then
+    echo "Generating commit message..."
+    commit_msg=$(git diff --cached | gemini --prompt "Generate a concise, conventional commit message (type: description) based on this git diff. Use conventional commit format with types like feat, fix, docs, style, refactor, test, chore:")
+
+    if [ $? -eq 0 ] && [ -n "$commit_msg" ]; then
+      echo "Generated commit message: $commit_msg"
+      read -p "Proceed with commit? (y/N): " confirm
+      if [[ $confirm =~ ^[Yy]$ ]]; then
+        git commit -m "$commit_msg"
+      else
+        echo "Commit cancelled"
+      fi
+    else
+      echo "Failed to generate commit message. Please commit manually."
+    fi
+  else
+    echo "No staged changes to commit"
+  fi
+}
+
+# Optional: Add alias for convenience
+alias gcm='gcm'
