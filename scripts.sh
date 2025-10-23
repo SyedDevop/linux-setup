@@ -69,3 +69,5 @@ gcm() {
 
 # Optional: Add alias for convenience
 alias gcm='gcm'
+
+alias weather='curl wttr.in'
