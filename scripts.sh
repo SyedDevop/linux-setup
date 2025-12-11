@@ -49,7 +49,7 @@ alias git-store="git config --global credential.helper store"
 gcm() {
   if ! git diff --cached --quiet; then
     echo "Generating commit message..."
-    commit_msg=$(git diff --cached | gemini --prompt "Generate a concise, conventional commit message (type: description) based on this git diff. Use conventional commit format with types like feat, fix, docs, style, refactor, test, chore:")
+    commit_msg=$(git diff --cached --ignore-all-space -w | gemini --prompt "Generate a concise, conventional commit message (type: description) based on this git diff. Use conventional commit format with types like feat, fix, docs, style, refactor, test, chore:")
 
     if [ $? -eq 0 ] && [ -n "$commit_msg" ]; then
       echo "Generated commit message: $commit_msg"
