@@ -71,3 +71,5 @@ gcm() {
 alias gcm='gcm'
 
 alias weather='curl wttr.in'
+
+alias local_ip='ip -4 -o addr show up | awk '\''{print $2, $4}'\'''
