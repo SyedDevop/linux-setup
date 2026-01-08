@@ -73,3 +73,10 @@ alias gcm='gcm'
 alias weather='curl wttr.in'
 
 alias local_ip='ip -4 -o addr show up | awk '\''{print $2, $4}'\'''
+
+# Function to navigate to the directory of the selected file
+cdf() {
+  local file
+  file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') || return
+  cd "$(dirname "$file")"
+}
