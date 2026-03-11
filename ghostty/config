@@ -6,7 +6,7 @@ window-decoration = false
 window-theme = ghostty
 
 background-opacity = 0.8
-theme = tokyonight
+theme = TokyoNight Night
 
 # Key bindings
 
