@@ -1,0 +1,4 @@
+[mgr]
+prepend_keymap = [
+	{ on = ["g","w"], run = "cd /media/work/", desc = "Cd to /media/work" },
+]
