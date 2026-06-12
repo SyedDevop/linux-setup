@@ -67,6 +67,79 @@ gcm() {
   fi
 }
 
+# Function for AI-generated commit messages
+lcm() {
+  # Ensure there are staged changes
+  if git diff --cached --quiet; then
+    echo "No staged changes to commit"
+    return 1
+  fi
+
+  echo "Generating commit message..."
+
+  # Capture diff safely
+  diff=$(git diff --cached --ignore-all-space -w)
+
+  # Build prompt using heredoc (clean + no escaping issues)
+  prompt=$(
+    cat <<EOF
+You are a Git commit message generator.
+
+Analyze the provided git diff and generate a commit message following the Conventional Commits specification.
+
+Rules:
+- Format: <type>(optional-scope): <short description>
+- Types: feat, fix, docs, style, refactor, test, chore
+- Use imperative mood (e.g., "add", "fix")
+- Max 60 characters in subject
+- No trailing period
+- Focus on intent, not just changes
+- Optional body: max 2–3 bullet points
+- Avoid vague phrases like "update code"
+
+Output:
+- Return ONLY the commit message
+- No explanations, no quotes
+
+Git diff:
+$diff
+EOF
+  )
+
+  # Run model
+  commit_msg=$(
+    /media/work/llm/llama-b9016/llama-cli \
+      -st \
+      -m /media/work/llm/Bonsai-8B.gguf \
+      -p "$prompt" \
+      --log-disable \
+      2>/dev/null
+  )
+
+  # Trim whitespace
+  commit_msg=$(echo "$commit_msg" | sed '/^\s*$/d')
+  echo "-------------------"
+  echo $commit_msg
+  echo "-------------------"
+  return 0
+  if [ -z "$commit_msg" ]; then
+    echo "Failed to generate commit message. Please commit manually."
+    return 1
+  fi
+
+  echo
+  echo "Generated commit message:"
+  echo "--------------------------------"
+  echo "$commit_msg"
+  echo "--------------------------------"
+
+  read -r -p "Proceed with commit? (y/N): " confirm
+  if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    git commit -m "$commit_msg"
+  else
+    echo "Commit cancelled"
+  fi
+}
 # Optional: Add alias for convenience
 alias gcm='gcm'
 
@@ -79,4 +152,14 @@ cdf() {
   local file
   file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') || return
   cd "$(dirname "$file")"
+}
+
+# A persistent scratchpad for temp per vary things
+scratch() {
+  nvim "$HOME/.scratchpad.md"
+  # if command -v nvim &>/dev/null; then
+  #   nvim -u NONE "$HOME/.scratchpad"
+  # else
+  #   vi "$HOME/.scratchpad"
+  # fi
 }
