@@ -18,6 +18,7 @@ $nodejs\
 $nim\
 $rust\
 $zig\
+$php\
 $python](fg:#292e42 bg:#86BBD8 bold)\
 [](fg:#86BBD8 bg:#06969A)\
 $docker_context\
@@ -98,6 +99,10 @@ format = ' $symbol ($version) '
 
 [nim]
 symbol = "nim  "
+format = ' $symbol ($version) '
+
+[php]
+symbol = "  "
 format = ' $symbol ($version) '
 
 [python]
