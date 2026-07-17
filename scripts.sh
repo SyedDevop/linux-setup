@@ -75,12 +75,32 @@ EOF
     if [ $? -eq 0 ] && [ -n "$commit_msg" ]; then
       echo "Generated commit message:"
       echo "$commit_msg"
-      read -p "Proceed with commit? (y/N): " confirm
-      if [[ $confirm =~ ^[Yy]$ ]]; then
-        git commit -m "$commit_msg"
-      else
-        echo "Commit cancelled"
-      fi
+      while true; do
+
+        echo ""
+        read -rp "Proceed with commit? ([y]es/ [c]opy/ [p]rompt/ [m]essage/ [n]o): " confirm
+
+        if [[ $confirm =~ ^[Yy]$ ]]; then
+          git commit -m "$commit_msg"
+          break
+        elif [[ $confirm =~ ^[Mm]$ ]]; then
+          echo ""
+          echo "The message:"
+          echo "$commit_msg"
+        elif [[ $confirm =~ ^[Pp]$ ]]; then
+          echo ""
+          echo "The Prompt:"
+          echo "$PROMPT"
+        elif [[ $confirm =~ ^[Cc]$ ]]; then
+          echo -n "$commit_msg" | xclip -selection clipboard
+          echo "Commit message copied to clipboard."
+        elif [[ $confirm =~ ^([Nn]|)$ ]]; then
+          echo "Commit cancelled."
+          break
+        else
+          echo "Invalid choice. Enter y, c, p, or n."
+        fi
+      done
     else
       echo "Failed to generate commit message. Please commit manually."
     fi
