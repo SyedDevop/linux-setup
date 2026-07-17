@@ -71,7 +71,8 @@ EOF
     commit_msg=$(opencode run "$PROMPT")
 
     if [ $? -eq 0 ] && [ -n "$commit_msg" ]; then
-      echo "Generated commit message:\n$commit_msg"
+      echo "Generated commit message:"
+      echo "$commit_msg"
       read -p "Proceed with commit? (y/N): " confirm
       if [[ $confirm =~ ^[Yy]$ ]]; then
         git commit -m "$commit_msg"
