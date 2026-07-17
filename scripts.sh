@@ -54,6 +54,8 @@ ocm() {
 Write a git commit message.
 Rules:
 - Line 1: subject (max 72 chars), imperative mood.
+- Types: feat, fix, docs, style, refactor, test, chore
+- Use imperative mood (e.g., "add", "fix")
 - Then a blank line.
 - Then an optional body in Markdown (bullets OK). Keep lines <= 72 chars when possible.
 - Output ONLY the commit message. Do not wrap in code fences.
