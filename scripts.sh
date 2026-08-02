@@ -51,22 +51,54 @@ ocm() {
     echo "Generating commit message..."
     PROMPT=$(
       cat <<EOF
-Write a git commit message.
+You are generating a git commit message. Analyze the staged diff below and
+describe what actually changed — not a generic placeholder message.
+
+Format:
+1. Subject line: "<type>(<scope>): <description>"
+   - type: one of feat, fix, docs, style, refactor, perf, test, chore, build, ci
+   - scope: optional, short (e.g. component, module, or file area touched);
+     omit the parentheses entirely if no clear scope applies
+   - description: imperative mood ("add", "fix", "remove" — not "added",
+     "fixes", "removing"), lowercase, no trailing period, max 50 chars
+     (hard max 72)
+2. Blank line.
+3. Body (only if the diff is non-trivial — skip for small one-line changes):
+   - Wrap at 72 chars
+   - Use "-" bullets, one per distinct logical change
+   - State WHAT changed and WHY if the diff makes the reason evident
+     (e.g. bug being fixed, behavior being added) — don't just restate
+     file names
+   - Group related hunks across files into one bullet if they serve the
+     same purpose; don't list every file separately unless each does
+     something different
+   - Mention breaking changes explicitly, prefixed with "BREAKING:"
+   - If the diff touches tests only, config only, or docs only, say so
+     plainly rather than inferring unrelated functional changes
+
 Rules:
-- Line 1: subject (max 72 chars), imperative mood.
-- Types: feat, fix, docs, style, refactor, test, chore
-- Use imperative mood (e.g., "add", "fix")
-- Then a blank line.
-- Then an optional body in Markdown (bullets OK). Keep lines <= 72 chars when possible.
-- Output ONLY the commit message. Do not wrap in code fences.
-- **DO NOT MAKE ANY TOOL CALLS OR PERFORM ANY GIT OR FILE OPERATIONS**
+- Base the message strictly on the diff content provided below — do not
+  invent functionality, fixes, or intent that isn't evidenced by the
+  actual changed lines.
+- If the diff is truncated or a file's changes aren't fully visible,
+  describe only what's visible; don't guess at the rest.
+- If there are no staged changes, output exactly: "chore: no staged changes"
+  and nothing else.
+- If staged changes exist but are trivial (whitespace, formatting,
+  comment tweaks), reflect that honestly (e.g. "style: ...") rather than
+  overstating their significance.
+- Output ONLY the commit message text. No preamble, no explanation, no
+  markdown code fences, no quotes around it.
+- DO NOT MAKE ANY TOOL CALLS OR PERFORM ANY GIT OR FILE OPERATIONS.
+
 Context:
 Branch: $(git symbolic-ref --quiet --short HEAD 2>/dev/null || echo "DETACHED")
+
 Staged changes (stat):
-$(git diff --staged --stat 2>/dev/null || true)
+$(git diff --staged --stat 2>/dev/null || echo "none")
+
 Staged diff:
-$(git diff --staged 2>/dev/null | head -c 8000 || true)
-If there are no staged changes, still generate a sensible message.
+$(git diff --staged 2>/dev/null | head -c 8000 || echo "none")
 EOF
     )
 
