@@ -110,10 +110,14 @@ EOF
       while true; do
 
         echo ""
-        read -rp "Proceed with commit? ([y]es/ [c]opy/ [p]rompt/ [m]essage/ [n]o): " confirm
+        read -rp "Proceed with commit? ([y]es/ [c]opy/ [p]rompt/ [m]essage/ [v]im [n]o): " confirm
 
         if [[ $confirm =~ ^[Yy]$ ]]; then
           git commit -m "$commit_msg"
+          break
+        elif [[ $confirm =~ ^[Vv]$ ]]; then
+          echo -n "$commit_msg" | xclip -selection clipboard
+          git commit -e -m "$commit_msg"
           break
         elif [[ $confirm =~ ^[Mm]$ ]]; then
           echo ""
