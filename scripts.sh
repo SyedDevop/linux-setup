@@ -1,3 +1,5 @@
+source "$HOME/app/linux-setup/nvimselect.sh"
+
 nf() {
   query=""
   if [[ $# -gt 0 ]]; then
