@@ -1,7 +1,6 @@
--- Pull in the wezterm API
+---@type Wezterm
 local wezterm = require("wezterm")
-
--- This will hold the configuration.
+---@type Config
 local config = wezterm.config_builder()
 
 local my = wezterm.color.get_builtin_schemes()["tokyonight_night"]
@@ -20,7 +19,7 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 
-config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 config.window_padding = {
 	left = 5,
@@ -28,5 +27,11 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
-
+config.keys = {
+	{
+		key = "e",
+		mods = "CTRL",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+}
 return config
