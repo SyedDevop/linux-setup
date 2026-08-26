@@ -100,7 +100,7 @@ Staged changes (stat):
 $(git diff --staged --stat 2>/dev/null || echo "none")
 
 Staged diff:
-$(git diff --staged 2>/dev/null | head -c 8000 || echo "none")
+$(rtk git diff --staged 2>/dev/null | head -c 8000 || echo "none")
 EOF
     )
 
@@ -147,8 +147,8 @@ EOF
   fi
 }
 
+alias hl='rg --passthru'
 alias gcm='ocm'
-
 alias weather='curl wttr.in'
 
 alias local_ip='ip -4 -o addr show up | awk '\''{print $2, $4}'\'''
