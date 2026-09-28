@@ -150,8 +150,8 @@ EOF
 alias hl='rg --passthru'
 alias gcm='ocm'
 alias weather='curl wttr.in'
-
 alias local_ip='ip -4 -o addr show up | awk '\''{print $2, $4}'\'''
+alias rmvp='rsync -ah --progress --remove-source-files'
 
 # Function to navigate to the directory of the selected file
 cdf() {
