@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Update Solidcraft to the latest version.
+# https://github.com/tangency-labs/solidcraft
+
+set -euo pipefail
+
+REPO="tangency-labs/solidcraft"
+ASSET="solidcraft-linux-x86_64.deb"
+DEB_FILE="/tmp/solidcraft.deb"
+
+if [[ $EUID -ne 0 ]]; then
+  echo "You must run this script as root. Use: sudo $0" >&2
+  exit 1
+fi
+
+for cmd in curl jq nala; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Error: Required command '$cmd' is not installed." >&2
+    exit 1
+  fi
+done
+
+if version=$(solidcraft-cli --version 2>/dev/null); then
+  echo "Currently installed Solidcraft version: $version"
+else
+  echo "Solidcraft is not installed."
+fi
+echo
+echo "Checking the latest Solidcraft release..."
+
+if ! release_json=$(
+  curl -fsSL "https://api.github.com/repos/$REPO/releases/latest"
+); then
+  echo "Error: Failed to fetch the latest release information." >&2
+  exit 1
+fi
+
+download_url=$(jq -er --arg asset "$ASSET" '.assets[] | select(.name == $asset) | .browser_download_url' <<<"$release_json") || {
+  echo "Error: Asset '$ASSET' was not found in the latest release." >&2
+  exit 1
+}
+
+version=$(jq -r '.tag_name // "unknown"' <<<"$release_json")
+
+echo "Latest Solidcraft version: $version"
+echo "Download URL: $download_url"
+echo
+
+read -rp "Proceed with update? ([y]es/[n]o): " confirm
+
+if [[ ! $confirm =~ ^[Yy]$ ]]; then
+  echo "Update cancelled."
+  exit 0
+fi
+
+trap 'rm -f "$DEB_FILE"' EXIT
+
+echo "Downloading Solidcraft..."
+curl -fL --retry 3 "$download_url" -o "$DEB_FILE"
+
+echo "Installing Solidcraft..."
+nala install -y "$DEB_FILE"
+
+echo "Solidcraft update completed successfully."
