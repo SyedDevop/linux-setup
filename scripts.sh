@@ -152,6 +152,7 @@ alias gcm='ocm'
 alias weather='curl wttr.in'
 alias local_ip='ip -4 -o addr show up | awk '\''{print $2, $4}'\'''
 alias rmvp='rsync -ah --progress --remove-source-files'
+alias mpvf='find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" -o -iname "*.m4v" -o -iname "*.flv" -o -iname "*.wmv" -o -iname "*.mpeg" -o -iname "*.mpg" -o -iname "*.ts" \) -print0 | fzf -m --read0 --print0 | xargs -0 -r mpv'
 
 # Function to navigate to the directory of the selected file
 cdf() {
